@@ -32,7 +32,7 @@ variable "dns_servers" {
 #
 variable "public_subnets" {
   description = "A list of public subnets inside the VPC"
-  type        = list()
+  type        = list(string)
   default     = []
 }
 
@@ -64,7 +64,7 @@ variable "public_service_endpoints" {
 #
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
-  type        = list()
+  type        = list(string)
   default     = []
 }
 
@@ -96,7 +96,7 @@ variable "private_service_endpoints" {
 #
 variable "database_subnets" {
   description = "A list of database subnets inside the VPC"
-  type        = list()
+  type        = list(string)
   default     = []
 }
 
@@ -128,7 +128,7 @@ variable "database_service_endpoints" {
 #
 variable "kubernetes_subnets" {
   description = "A list of kubernetes subnets inside the VPC"
-  type        = list()
+  type        = list(string)
   default     = []
 }
 
