@@ -31,7 +31,8 @@ resource "azurerm_virtual_network" "this" {
 # public subnet resources
 #
 resource "azurerm_subnet" "public" {
-  count = local.create_public_subnets && length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
+  # count = local.create_public_subnets && length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
+  count = length(var.public_subnets)
 
   name                 = "public-${count.index}"
   address_prefixes     = element(concat(var.public_subnets, [""]), count.index)
@@ -43,7 +44,8 @@ resource "azurerm_subnet" "public" {
 # private subnet resources
 #
 resource "azurerm_subnet" "private" {
-  count = local.create_private_subnets && length(var.private_subnets) > 0 ? length(var.private_subnets) : 0
+  # count = local.create_private_subnets && length(var.private_subnets) > 0 ? length(var.private_subnets) : 0
+  count = length(var.private_subnets)
 
   name                 = "private-${count.index}"
   address_prefixes     = element(concat(var.private_subnets, [""]), count.index)
@@ -55,7 +57,8 @@ resource "azurerm_subnet" "private" {
 # database subnet resources
 #
 resource "azurerm_subnet" "database" {
-  count = local.create_database_subnets && length(var.database_subnets) > 0 ? length(var.database_subnets) : 0
+  # count = local.create_database_subnets && length(var.database_subnets) > 0 ? length(var.database_subnets) : 0
+  count = length(var.database_subnets)
 
   name                 = "database-${count.index}"
   address_prefixes     = element(concat(var.database_subnets, [""]), count.index)
@@ -67,7 +70,8 @@ resource "azurerm_subnet" "database" {
 # kubernetes subnet resources
 #
 resource "azurerm_subnet" "kubernetes" {
-  count = local.create_kubernetes_subnets && length(var.kubernetes_subnets) > 0 ? length(var.kubernetes_subnets) : 0
+  #count = local.create_kubernetes_subnets && length(var.kubernetes_subnets) > 0 ? length(var.kubernetes_subnets) : 0
+  count = length(var.kubernetes_subnets)
 
   name                 = "kubernetes-${count.index}"
   address_prefixes     = element(concat(var.kubernetes_subnets, [""]), count.index)
