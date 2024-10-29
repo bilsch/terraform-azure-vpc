@@ -24,6 +24,7 @@ resource "azurerm_subnet" "public" {
   address_prefixes     = var.public_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
+  service_endpoints    = var.public_service_endpoints
 }
 
 #
@@ -36,6 +37,7 @@ resource "azurerm_subnet" "private" {
   address_prefixes     = var.private_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
+  service_endpoints    = var.private_service_endpoints
 }
 
 #
@@ -48,6 +50,7 @@ resource "azurerm_subnet" "database" {
   address_prefixes     = var.database_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
+  service_endpoints    = var.database_service_endpoints
 }
 
 #
@@ -60,4 +63,5 @@ resource "azurerm_subnet" "kubernetes" {
   address_prefixes     = var.kubernetes_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
+  service_endpoints    = var.kubernetes_service_endpoints
 }
