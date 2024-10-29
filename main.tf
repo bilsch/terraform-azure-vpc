@@ -14,6 +14,23 @@ resource "azurerm_virtual_network_dns_servers" "this" {
   dns_servers        = var.dns_servers
 }
 
+# location            = data.azurerm_resource_group.this.location
+# resource_group_name = data.azurerm_resource_group.this.name
+
+resource "azurerm_route_table" "public" {
+  for_each = var.public_subnets
+
+  name                = "public-${each.key}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+
+  route {
+    name           = "public-${each.key}"
+    address_prefix = each.value
+    next_hop_type  = "VirtualAppliance"
+  }
+}
+
 #
 # public subnet resources
 #
