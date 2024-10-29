@@ -53,7 +53,6 @@ variable "public_service_endpoints" {
     "Microsoft.KeyVault",
     "Microsoft.ServiceBus",
     "Microsoft.Sql",
-    "Microsoft.Storage",
     "Microsoft.Storage.Global",
     "Microsoft.Web"
   ]
@@ -85,7 +84,6 @@ variable "private_service_endpoints" {
     "Microsoft.KeyVault",
     "Microsoft.ServiceBus",
     "Microsoft.Sql",
-    "Microsoft.Storage",
     "Microsoft.Storage.Global",
     "Microsoft.Web"
   ]
@@ -117,7 +115,6 @@ variable "database_service_endpoints" {
     "Microsoft.KeyVault",
     "Microsoft.ServiceBus",
     "Microsoft.Sql",
-    "Microsoft.Storage",
     "Microsoft.Storage.Global",
     "Microsoft.Web"
   ]
@@ -149,7 +146,6 @@ variable "kubernetes_service_endpoints" {
     "Microsoft.KeyVault",
     "Microsoft.ServiceBus",
     "Microsoft.Sql",
-    "Microsoft.Storage",
     "Microsoft.Storage.Global",
     "Microsoft.Web"
   ]
