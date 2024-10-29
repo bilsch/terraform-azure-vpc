@@ -14,8 +14,18 @@ resource "azurerm_virtual_network_dns_servers" "this" {
   dns_servers        = var.dns_servers
 }
 
-# location            = data.azurerm_resource_group.this.location
-# resource_group_name = data.azurerm_resource_group.this.name
+#
+# public subnet resources
+#
+resource "azurerm_subnet" "public" {
+  count = length(var.public_subnets) > 0 ? 1 : 0
+
+  name                 = "public"
+  address_prefixes     = var.public_subnets
+  resource_group_name  = data.azurerm_resource_group.this.name
+  virtual_network_name = azurerm_virtual_network.this.name
+  service_endpoints    = var.public_service_endpoints
+}
 
 resource "azurerm_route_table" "public" {
   count = length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
@@ -32,19 +42,6 @@ resource "azurerm_route_table" "public" {
 }
 
 #
-# public subnet resources
-#
-resource "azurerm_subnet" "public" {
-  count = length(var.public_subnets) > 0 ? 1 : 0
-
-  name                 = "public"
-  address_prefixes     = var.public_subnets
-  resource_group_name  = data.azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
-  service_endpoints    = var.public_service_endpoints
-}
-
-#
 # private subnet resources
 #
 resource "azurerm_subnet" "private" {
@@ -55,6 +52,20 @@ resource "azurerm_subnet" "private" {
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   service_endpoints    = var.private_service_endpoints
+}
+
+resource "azurerm_route_table" "private" {
+  count = length(var.private_subnets) > 0 ? length(var.private_subnets) : 0
+
+  name                = "private-${count.index}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+
+  route {
+    name           = "private-${count.index}"
+    address_prefix = element(var.private_subnets, count.index)
+    next_hop_type  = "VnetLocal"
+  }
 }
 
 #
@@ -70,6 +81,20 @@ resource "azurerm_subnet" "database" {
   service_endpoints    = var.database_service_endpoints
 }
 
+resource "azurerm_route_table" "database" {
+  count = length(var.database_subnets) > 0 ? length(var.database_subnets) : 0
+
+  name                = "database-${count.index}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+
+  route {
+    name           = "database-${count.index}"
+    address_prefix = element(var.database_subnets, count.index)
+    next_hop_type  = "VnetLocal"
+  }
+}
+
 #
 # kubernetes subnet resources
 #
@@ -81,4 +106,18 @@ resource "azurerm_subnet" "kubernetes" {
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   service_endpoints    = var.kubernetes_service_endpoints
+}
+
+resource "azurerm_route_table" "kubernetes" {
+  count = length(var.kubernetes_subnets) > 0 ? length(var.kubernetes_subnets) : 0
+
+  name                = "kubernetes-${count.index}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+
+  route {
+    name           = "kubernetes-${count.index}"
+    address_prefix = element(var.kubernetes_subnets, count.index)
+    next_hop_type  = "VnetLocal"
+  }
 }
