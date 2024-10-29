@@ -6,6 +6,14 @@ Note that I'm implementing things in stages. The first stage is the basic vpc la
 
 PRs welcome. Consider this module very TBD ;)
 
+## TODO
+
+Looking at the Azure provided vpc module [terraform-azurerm-avm-res-network-virtualnetwork](https://github.com/Azure/terraform-azurerm-avm-res-network-virtualnetwork/tree/main) there are some things this module could stand to implement:
+
+1. vpc peering
+1. ddos protection
+1. probably others
+
 # Things known not supported
 
 1. ipv6
