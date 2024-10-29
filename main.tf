@@ -27,19 +27,19 @@ resource "azurerm_subnet" "public" {
   service_endpoints    = var.public_service_endpoints
 }
 
-resource "azurerm_route_table" "public" {
-  count = length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
+# resource "azurerm_route_table" "public" {
+#   count = length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
 
-  name                = "public-${count.index}"
-  location            = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
+#   name                = "public-${count.index}"
+#   location            = data.azurerm_resource_group.this.location
+#   resource_group_name = data.azurerm_resource_group.this.name
 
-  route {
-    name           = "public-${count.index}"
-    address_prefix = element(var.public_subnets, count.index)
-    next_hop_type  = "VnetLocal"
-  }
-}
+#   route {
+#     name           = "public-${count.index}"
+#     address_prefix = element(var.public_subnets, count.index)
+#     next_hop_type  = "VnetLocal"
+#   }
+# }
 
 #
 # private subnet resources
@@ -54,19 +54,19 @@ resource "azurerm_subnet" "private" {
   service_endpoints    = var.private_service_endpoints
 }
 
-resource "azurerm_route_table" "private" {
-  count = length(var.private_subnets) > 0 ? length(var.private_subnets) : 0
+# resource "azurerm_route_table" "private" {
+#   count = length(var.private_subnets) > 0 ? length(var.private_subnets) : 0
 
-  name                = "private-${count.index}"
-  location            = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
+#   name                = "private-${count.index}"
+#   location            = data.azurerm_resource_group.this.location
+#   resource_group_name = data.azurerm_resource_group.this.name
 
-  route {
-    name           = "private-${count.index}"
-    address_prefix = element(var.private_subnets, count.index)
-    next_hop_type  = "VnetLocal"
-  }
-}
+#   route {
+#     name           = "private-${count.index}"
+#     address_prefix = element(var.private_subnets, count.index)
+#     next_hop_type  = "VnetLocal"
+#   }
+# }
 
 #
 # database subnet resources
@@ -81,19 +81,19 @@ resource "azurerm_subnet" "database" {
   service_endpoints    = var.database_service_endpoints
 }
 
-resource "azurerm_route_table" "database" {
-  count = length(var.database_subnets) > 0 ? length(var.database_subnets) : 0
+# resource "azurerm_route_table" "database" {
+#   count = length(var.database_subnets) > 0 ? length(var.database_subnets) : 0
 
-  name                = "database-${count.index}"
-  location            = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
+#   name                = "database-${count.index}"
+#   location            = data.azurerm_resource_group.this.location
+#   resource_group_name = data.azurerm_resource_group.this.name
 
-  route {
-    name           = "database-${count.index}"
-    address_prefix = element(var.database_subnets, count.index)
-    next_hop_type  = "VnetLocal"
-  }
-}
+#   route {
+#     name           = "database-${count.index}"
+#     address_prefix = element(var.database_subnets, count.index)
+#     next_hop_type  = "VnetLocal"
+#   }
+# }
 
 #
 # kubernetes subnet resources
@@ -108,16 +108,16 @@ resource "azurerm_subnet" "kubernetes" {
   service_endpoints    = var.kubernetes_service_endpoints
 }
 
-resource "azurerm_route_table" "kubernetes" {
-  count = length(var.kubernetes_subnets) > 0 ? length(var.kubernetes_subnets) : 0
+# resource "azurerm_route_table" "kubernetes" {
+#   count = length(var.kubernetes_subnets) > 0 ? length(var.kubernetes_subnets) : 0
 
-  name                = "kubernetes-${count.index}"
-  location            = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
+#   name                = "kubernetes-${count.index}"
+#   location            = data.azurerm_resource_group.this.location
+#   resource_group_name = data.azurerm_resource_group.this.name
 
-  route {
-    name           = "kubernetes-${count.index}"
-    address_prefix = element(var.kubernetes_subnets, count.index)
-    next_hop_type  = "VnetLocal"
-  }
-}
+#   route {
+#     name           = "kubernetes-${count.index}"
+#     address_prefix = element(var.kubernetes_subnets, count.index)
+#     next_hop_type  = "VnetLocal"
+#   }
+# }
