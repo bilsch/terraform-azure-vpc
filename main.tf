@@ -20,7 +20,7 @@ resource "azurerm_virtual_network_dns_servers" "this" {
 resource "azurerm_subnet" "public" {
   count = length(var.public_subnets) > 0 ? 1 : 0
 
-  name                 = "public-${count.index}"
+  name                 = "public"
   address_prefixes     = var.public_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
@@ -32,7 +32,7 @@ resource "azurerm_subnet" "public" {
 resource "azurerm_subnet" "private" {
   count = length(var.private_subnets) > 0 ? 1 : 0
 
-  name                 = "private-${count.index}"
+  name                 = "private"
   address_prefixes     = var.private_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
@@ -44,7 +44,7 @@ resource "azurerm_subnet" "private" {
 resource "azurerm_subnet" "database" {
   count = length(var.database_subnets) > 0 ? 1 : 0
 
-  name                 = "database-${count.index}"
+  name                 = "database"
   address_prefixes     = var.database_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
@@ -56,7 +56,7 @@ resource "azurerm_subnet" "database" {
 resource "azurerm_subnet" "kubernetes" {
   count = length(var.kubernetes_subnets) > 0 ? 1 : 0
 
-  name                 = "kubernetes-${count.index}"
+  name                 = "kubernetes"
   address_prefixes     = var.kubernetes_subnets
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
