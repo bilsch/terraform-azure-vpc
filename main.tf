@@ -26,7 +26,7 @@ resource "azurerm_route_table" "public" {
 
   route {
     name           = "public-${count.index}"
-    address_prefix = index(var.public_subnets, count.index)
+    address_prefix = element(var.public_subnets, count.index)
     next_hop_type  = "VirtualAppliance"
   }
 }
