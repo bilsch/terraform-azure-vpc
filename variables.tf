@@ -17,7 +17,7 @@ variable "tags" {
 # VPC related variables
 #
 variable "cidr" {
-  type        = string
+  type        = list(string)
   description = "cidr block for the vpc"
 }
 
