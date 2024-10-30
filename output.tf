@@ -72,3 +72,10 @@ output "kubernetes_names" {
 output "kubernetes_service_endpoints" {
   value = azurerm_subnet.kubernetes.*.service_endpoints
 }
+
+#
+# nat gateway outputs
+#
+output "nat_gateway_public_ip" {
+  value = azurerm_public_ip.this.ip_address
+}

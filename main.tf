@@ -121,3 +121,26 @@ resource "azurerm_subnet" "kubernetes" {
 #     next_hop_type  = "VnetLocal"
 #   }
 # }
+
+#
+# Nat gateway support
+#
+resource "azurerm_public_ip" "this" {
+  name                = "${var.name}-example-PIP"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_nat_gateway" "this" {
+  name                = "${var.name}-nat-Gateway"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  sku_name            = "Standard"
+}
+
+resource "azurerm_nat_gateway_public_ip_association" "this" {
+  nat_gateway_id       = azurerm_nat_gateway.this.id
+  public_ip_address_id = azurerm_public_ip.this.id
+}
