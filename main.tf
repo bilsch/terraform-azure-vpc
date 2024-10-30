@@ -28,7 +28,7 @@ resource "azurerm_subnet" "public" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "public" {
-  subnet_id      = azurerm_subnet.public.id
+  subnet_id      = azurerm_subnet.public.*.id
   nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
@@ -60,7 +60,7 @@ resource "azurerm_subnet" "private" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "private" {
-  subnet_id      = azurerm_subnet.private.id
+  subnet_id      = azurerm_subnet.private.*.id
   nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
@@ -92,7 +92,7 @@ resource "azurerm_subnet" "database" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "database" {
-  subnet_id      = azurerm_subnet.database.id
+  subnet_id      = azurerm_subnet.database.*.id
   nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
@@ -124,7 +124,7 @@ resource "azurerm_subnet" "kubernetes" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "kubernetes" {
-  subnet_id      = azurerm_subnet.kubernetes.id
+  subnet_id      = azurerm_subnet.kubernetes.*.id
   nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
