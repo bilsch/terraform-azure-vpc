@@ -27,6 +27,11 @@ resource "azurerm_subnet" "public" {
   service_endpoints    = var.public_service_endpoints
 }
 
+resource "azurerm_subnet_nat_gateway_association" "public" {
+  subnet_id      = azurerm_subnet.public.id
+  nat_gateway_id = azurerm_nat_gateway.this.id
+}
+
 # resource "azurerm_route_table" "public" {
 #   count = length(var.public_subnets) > 0 ? length(var.public_subnets) : 0
 
@@ -52,6 +57,11 @@ resource "azurerm_subnet" "private" {
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   service_endpoints    = var.private_service_endpoints
+}
+
+resource "azurerm_subnet_nat_gateway_association" "private" {
+  subnet_id      = azurerm_subnet.private.id
+  nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
 # resource "azurerm_route_table" "private" {
@@ -81,6 +91,11 @@ resource "azurerm_subnet" "database" {
   service_endpoints    = var.database_service_endpoints
 }
 
+resource "azurerm_subnet_nat_gateway_association" "database" {
+  subnet_id      = azurerm_subnet.database.id
+  nat_gateway_id = azurerm_nat_gateway.this.id
+}
+
 # resource "azurerm_route_table" "database" {
 #   count = length(var.database_subnets) > 0 ? length(var.database_subnets) : 0
 
@@ -106,6 +121,11 @@ resource "azurerm_subnet" "kubernetes" {
   resource_group_name  = data.azurerm_resource_group.this.name
   virtual_network_name = azurerm_virtual_network.this.name
   service_endpoints    = var.kubernetes_service_endpoints
+}
+
+resource "azurerm_subnet_nat_gateway_association" "kubernetes" {
+  subnet_id      = azurerm_subnet.kubernetes.id
+  nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
 # resource "azurerm_route_table" "kubernetes" {
