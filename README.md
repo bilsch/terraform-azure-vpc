@@ -6,6 +6,8 @@ Note that I'm implementing things in stages. The first stage is the basic vpc la
 
 PRs welcome. Consider this module very TBD ;)
 
+Note this module is very immautre. It is being developed as a means of learning azure and vpc / networking. It for sure is not tested much if at all - it applies ;) Use this module at your own risk
+
 ## TODO
 
 Looking at the Azure provided vpc module [terraform-azurerm-avm-res-network-virtualnetwork](https://github.com/Azure/terraform-azurerm-avm-res-network-virtualnetwork/tree/main) there are some things this module could stand to implement:
